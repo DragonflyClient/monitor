@@ -1,11 +1,13 @@
 package net.dragonfly.monitor
 
+import com.google.gson.*
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.gson.*
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
+import java.lang.reflect.Type
 
 private const val RESET = "\u001B[0m"
 private const val RED = "\u001B[31m"
@@ -23,7 +25,13 @@ object DragonflyMonitor {
         println("Launching on port $port")
         embeddedServer(Netty, port = port.toInt()) {
             install(ContentNegotiation) {
-                gson {  }
+                gson {
+                    registerTypeAdapter(Status::class.java, object : JsonSerializer<Status> {
+                        override fun serialize(p0: Status?, p1: Type?, p2: JsonSerializationContext?): JsonElement {
+                            return JsonPrimitive(p0?.toString() ?: "null")
+                        }
+                    })
+                }
             }
 
             routing {
