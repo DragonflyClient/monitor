@@ -13,7 +13,7 @@ object DragonflyMonitor {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        val port = System.getenv("port")
+        val port = System.getenv("PORT")
         println("Launching on port $port")
         embeddedServer(Netty, port = port.toInt(), host = "127.0.0.1") {
             routing {
