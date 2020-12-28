@@ -16,7 +16,7 @@ private const val YELLOW = "\u001B[33m"
 
 object DragonflyMonitor {
 
-    val servicesWithStatus = listOf("API", "Blog", "Dashboard", "Dragonfly Main Page", "Ideas Platform", "Kernel")
+    val servicesWithStatus = listOf("API", "Blog", "Dashboard", "Main Page", "Ideas Platform", "Kernel")
         .associateWith { Status.AVAILABLE }.toMutableMap()
 
     @JvmStatic
