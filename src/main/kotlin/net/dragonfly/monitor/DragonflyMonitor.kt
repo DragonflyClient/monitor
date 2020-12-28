@@ -1,13 +1,8 @@
 package net.dragonfly.monitor
 
-import io.ktor.application.call
-import io.ktor.html.respondHtml
-import io.ktor.http.HttpStatusCode
-import io.ktor.routing.get
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-import kotlinx.html.*
 
 object DragonflyMonitor {
 
@@ -17,21 +12,9 @@ object DragonflyMonitor {
         println("Launching on port $port")
         embeddedServer(Netty, port = port.toInt()) {
             routing {
-                get("/") {
-                    call.respondHtml(HttpStatusCode.OK, HTML::index)
-                }
+                ping()
+                status()
             }
         }.start(wait = true)
-    }
-}
-
-fun HTML.index() {
-    head {
-        title("Hello from Ktor!")
-    }
-    body {
-        div {
-            +"Hello from Ktor"
-        }
     }
 }
