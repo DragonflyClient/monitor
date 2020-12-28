@@ -13,7 +13,9 @@ object DragonflyMonitor {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        embeddedServer(Netty, port = 80, host = "127.0.0.1") {
+        val port = System.getenv("port")
+        println("Launching on port $port")
+        embeddedServer(Netty, port = port.toInt(), host = "127.0.0.1") {
             routing {
                 get("/") {
                     call.respondHtml(HttpStatusCode.OK, HTML::index)
