@@ -22,10 +22,8 @@ fun Routing.ping() {
         require(json.get("organization_id").numberValue() == 130428)
         require(json.get("webhook_id").numberValue() == 22569)
 
-        println(json.toPrettyString())
-
         val event = jacksonObjectMapper.treeToValue<WebhookEvent>(json.get("webhook_event_data"))
-        println(event)
+        DragonflyMonitor.handleEvent(event!!)
 
         call.respond(HttpStatusCode.OK, "OK")
     }

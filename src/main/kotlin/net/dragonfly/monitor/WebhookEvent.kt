@@ -10,5 +10,7 @@ data class WebhookEvent(
     @JsonProperty("check_name")
     val checkName: String,
     @JsonProperty("request_url")
-    val requestUrl: String
+    val requestUrl: String,
+    @JsonProperty("http_status_code")
+    val httpStatusCode: Int
 )

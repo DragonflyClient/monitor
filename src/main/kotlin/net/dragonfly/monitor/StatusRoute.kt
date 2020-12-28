@@ -6,6 +6,6 @@ import io.ktor.routing.*
 
 fun Routing.status() {
     get("status") {
-        call.respond(mapOf("success" to "true"))
+        call.respond(DragonflyMonitor.servicesWithStatus)
     }
 }
